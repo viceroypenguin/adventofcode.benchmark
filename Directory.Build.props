@@ -16,6 +16,7 @@
 	<ItemGroup>
 		<Using Include="AdventOfCode.Common"/>
 		<Using Include="AdventOfCode.Common.Attributes"/>
+		<Using Include="AdventOfCode.Common.Extensions"/>
 		<Using Include="AdventOfCode.Common.Interfaces"/>
 		<Using Include="AdventOfCode.Common.Models"/>
 		<Using Include="SuperLinq"/>
