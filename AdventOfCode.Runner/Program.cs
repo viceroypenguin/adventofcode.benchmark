@@ -24,11 +24,6 @@ if (args.Length > 0)
 	{
 		var puzzles = runner.GetPuzzles().AsEnumerable();
 
-		if (arguments.OptOriginal)
-			puzzles = puzzles.Where(p => p.CodeType == CodeType.Original);
-		else if (arguments.OptFastest)
-			puzzles = puzzles.Where(p => p.CodeType == CodeType.Fastest);
-
 		if (arguments.OptYear != null)
 		{
 			puzzles = puzzles.Where(p => p.Year == Convert.ToInt32(arguments.OptYear));
@@ -36,18 +31,7 @@ if (args.Length > 0)
 				puzzles = puzzles.Where(p => p.Day == Convert.ToInt32(arguments.OptDay));
 		}
 
-		if (arguments.OptBenchmark)
-		{
-			_ = runner.BenchmarkPuzzles(puzzles);
-		}
-		else
-		{
-			RunPuzzles(puzzles
-				.OrderBy(p => p.Year)
-				.ThenBy(p => p.Day)
-				.ThenBy(p => p.CodeType == CodeType.Original ? 0 : 1)
-				.ToList());
-		}
+		runner.BenchmarkPuzzles(puzzles);
 
 		return 0;
 	}
@@ -64,15 +48,13 @@ else
 
 	var puzzles = runner.GetPuzzles();
 
-	var years = puzzles.Select(x => x.Year).Distinct().OrderBy(x => x).ToList();
-
-	if (years.Count == 0)
+	if (!puzzles.Any(p => p.CodeType != CodeType.Original))
 	{
-		console.Markup("Could not find any puzzles. Exiting.");
+		console.Markup("[red]Could not find any puzzles. Exiting.[/]");
 		return 0;
 	}
 
-	(var year, puzzles) = PickYear(puzzles, years);
+	(var year, puzzles) = PickYear(puzzles);
 
 	console.MarkupLineInterpolated($"Running year [red]{year}[/].");
 
@@ -80,19 +62,17 @@ else
 
 	console.MarkupLineInterpolated($"Running puzzle(s) [red]{string.Join(", ", puzzles.Select(x => x.Day))}[/].");
 
-	var doBenchmark = console.Confirm("Do you want to benchmark?", false);
+	runner.BenchmarkPuzzles(puzzles);
 
-	if (doBenchmark)
-	{
-		runner.BenchmarkPuzzles(puzzles);
-	}
-	else
-	{
-		RunPuzzles(puzzles);
-	}
+	return 0;
 
-	(int, IReadOnlyCollection<PuzzleModel>) PickYear(IReadOnlyCollection<PuzzleModel> puzzles, IReadOnlyList<int> years)
+	(int, IReadOnlyCollection<PuzzleModel>) PickYear(IReadOnlyCollection<PuzzleModel> puzzles)
 	{
+		var years = puzzles
+			.Where(p => p.CodeType != CodeType.Original)
+			.Select(x => x.Year).Distinct().OrderBy(x => x)
+			.ToList();
+
 		var year = years[^1];
 
 		if (years.Count > 1)
@@ -124,46 +104,7 @@ else
 		return puzzles
 			.Where(p => selectedDays.Contains(p.Day))
 			.OrderBy(p => p.Day)
-			.ThenBy(p => p.CodeType == CodeType.Original ? 0 : 1)
+			.ThenBy(p => (int)p.CodeType)
 			.ToList();
 	}
-
-	return 0;
-}
-
-void RunPuzzles(IReadOnlyCollection<PuzzleModel> puzzles)
-{
-	var rootTable = new Table().Expand()
-		.AddColumn("Dummy")
-		.HideHeaders()
-		.NoBorder();
-
-	var outputTable = new Table().Expand()
-		.HorizontalBorder()
-		.AddColumn("Problem")
-		.AddColumn("Part 1")
-		.AddColumn("Part 2")
-		.AddColumn("Solve Time", tc => tc.RightAligned())
-		.ShowFooters();
-
-	_ = rootTable.AddRow(outputTable);
-
-	console.Live(rootTable)
-		.Start(ctx =>
-		{
-			var totalSolve = TimeSpan.Zero;
-			foreach (var r in runner.RunPuzzles(puzzles))
-			{
-				_ = outputTable.AddRow(
-					new Markup($"{r.Puzzle.Year} - {r.Puzzle.Day} - {r.Puzzle.CodeType}"),
-					new Markup($"[red]{r.Part1}[/]"),
-					new Markup($"[red]{r.Part2}[/]"),
-					new Markup($"[blue]{r.Elapsed.TotalMicroseconds:N0}[/]μs"));
-
-				totalSolve += r.Elapsed;
-				outputTable.Columns[3].Footer = new Markup($"[blue]{totalSolve.TotalMicroseconds:N0}[/]μs");
-
-				ctx.Refresh();
-			}
-		});
 }

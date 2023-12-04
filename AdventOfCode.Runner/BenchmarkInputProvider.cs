@@ -1,14 +1,14 @@
-﻿using System.Net;
-using System.Text;
-using Microsoft.Extensions.Configuration;
-
-namespace AdventOfCode.Runner;
+﻿namespace AdventOfCode.Runner;
 
 public static class BenchmarkInputProvider
 {
 	public static PuzzleInput GetRawInput(int year, int day)
 	{
-		var inputFile = @$"..\..\..\..\..\..\..\Inputs\{year}\day{day:00}.input.txt";
+		var inputFile = @$"Inputs\{year}\day{day:00}.input.txt";
+		if (!Directory.Exists("Inputs"))
+		{
+			inputFile = @"..\..\..\..\..\..\..\" + inputFile;
+		}
 
 		return new(
 			File.ReadAllBytes(inputFile),

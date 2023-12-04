@@ -3,7 +3,10 @@
 public enum CodeType
 {
 	Original,
-	Fastest,
+	ViceroyPenguin,
+	Csa,
+	Akari,
+	Lisa,
 }
 
 [AttributeUsage(AttributeTargets.Class)]
