@@ -1,7 +1,7 @@
 ﻿namespace AdventOfCode.Puzzles._2023;
 
-[Puzzle(2023, 02, CodeType.ViceroyPenguin)]
-public partial class Day_02_ViceroyPenguin : IPuzzle
+[Puzzle(2023, 02, CodeType.Fastest)]
+public partial class Day_02_Fastest : IPuzzle
 {
 	public (string, string) Solve(PuzzleInput input)
 	{
@@ -9,11 +9,12 @@ public partial class Day_02_ViceroyPenguin : IPuzzle
 		var part2 = 0;
 		var span = input.Span;
 
-		var id = 1;
+		var id = 0;
 		while (span.Length > 0)
 		{
+			id++;
 			span = span.Slice(
-				id switch { > 100 => 10, > 10 => 9, _ => 8, });
+				id switch { >= 100 => 10, >= 10 => 9, _ => 8, });
 
 			var maxRed = 0;
 			var maxGreen = 0;
