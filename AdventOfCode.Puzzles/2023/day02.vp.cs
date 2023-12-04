@@ -1,7 +1,7 @@
 ﻿namespace AdventOfCode.Puzzles._2023;
 
-[Puzzle(2023, 02, CodeType.Fastest)]
-public partial class Day_02_Fastest : IPuzzle
+[Puzzle(2023, 02, CodeType.ViceroyPenguin)]
+public partial class Day_02_ViceroyPenguin : IPuzzle
 {
 	public (string, string) Solve(PuzzleInput input)
 	{
