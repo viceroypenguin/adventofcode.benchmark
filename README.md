@@ -53,6 +53,18 @@ BenchmarkDotNet v0.13.10, Windows 11 (10.0.22621.2715/22H2/2022Update/SunValley2
 
 </details>
 
+<details>
+<summary>Day 4</summary>
+
+| Owner           | Mean        | Error     | StdDev    | Allocated |
+|---------------- |------------:|----------:|----------:|----------:|
+| @ClxS           | 1,481.27 us | 14.915 us | 13.952 us | 4736212 B |
+| @CameronAavik   |    10.26 us |  0.063 us |  0.059 us |     944 B |
+| @TwilightVanish |    44.46 us |  0.327 us |  0.289 us |   45672 B |
+| @viceroypenguin |    12.74 us |  0.054 us |  0.050 us |      72 B |
+
+</details>
+
 ### How to Run
 
 This repo does not download puzzle files automatically. It is generally assumed that consumers have already downloaded files for their own daily competition.
