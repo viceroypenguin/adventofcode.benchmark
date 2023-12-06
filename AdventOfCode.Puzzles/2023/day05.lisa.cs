@@ -1,7 +1,7 @@
 ﻿namespace AdventOfCode.Puzzles._2023;
 
 [Puzzle(2023, 05, CodeType.Lisa)]
-public partial class Day_51_Lisa : IPuzzle
+public partial class Day_05_Lisa : IPuzzle
 {
 	public (string, string) Solve(PuzzleInput input)
 	{
