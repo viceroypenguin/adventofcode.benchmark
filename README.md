@@ -101,8 +101,8 @@ BenchmarkDotNet v0.13.10, Windows 11 (10.0.22621.2715/22H2/2022Update/SunValley2
 
 | Owner           | Mean     | Error   | StdDev  | Allocated |
 |---------------- |---------:|--------:|--------:|----------:|
-| @CameronAavik   | 147.0 us | 0.74 us | 0.61 us |   21426 B |
-| @viceroypenguin | 322.3 us | 3.57 us | 3.34 us |      88 B |
+| @CameronAavik   | 147.3 us | 1.12 us | 1.05 us |   21426 B |
+| @viceroypenguin | 291.1 us | 1.37 us | 1.21 us |      88 B |
 
 </details>
 
