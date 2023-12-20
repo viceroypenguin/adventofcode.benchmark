@@ -136,7 +136,8 @@ public class PuzzleRunner
 
 			foreach (var p in g.Where(p => p.CodeType != CodeType.Original))
 			{
-				if (RunPuzzle(p) != valid)
+				var q = RunPuzzle(p);
+				if (q != valid)
 				{
 					message = $"(Year: {p.Year}, Day: {p.Day}) Puzzle `{p.CodeType}` returns a different value than the `Original`.";
 					return false;
