@@ -136,6 +136,46 @@ BenchmarkDotNet v0.13.10, Windows 11 (10.0.22621.2715/22H2/2022Update/SunValley2
 
 </details>
 
+<details>
+<summary>Day 12</summary>
+
+| Owner           | Mean         | Error      | StdDev     | Allocated |
+|---------------- |-------------:|-----------:|-----------:|----------:|
+| @CameronAavik   | 1,552.732 us |  5.1576 us |  4.8244 us |  162428 B |
+| @viceroypenguin | 4,960.799 us | 22.7067 us | 20.1289 us |      83 B |
+
+</details>
+
+<details>
+<summary>Day 13</summary>
+
+| Owner           | Mean         | Error      | StdDev     | Allocated |
+|---------------- |-------------:|-----------:|-----------:|----------:|
+| @CameronAavik   |     7.032 us |  0.0228 us |  0.0190 us |      64 B |
+| @viceroypenguin |     9.713 us |  0.0529 us |  0.0495 us |      64 B |
+
+</details>
+
+<details>
+<summary>Day 15</summary>
+
+| Owner           | Mean         | Error      | StdDev     | Allocated |
+|---------------- |-------------:|-----------:|-----------:|----------:|
+| @CameronAavik   |    58.533 us |  0.6893 us |  0.6447 us |   65640 B |
+| @viceroypenguin |    40.111 us |  0.2259 us |  0.2113 us |      80 B |
+
+</details>
+
+<details>
+<summary>Day 18</summary>
+
+| Owner           | Mean         | Error      | StdDev     | Allocated |
+|---------------- |-------------:|-----------:|-----------:|----------:|
+| @CameronAavik   |     3.568 us |  0.0103 us |  0.0091 us |      88 B |
+| @viceroypenguin |     5.378 us |  0.0174 us |  0.0155 us |      88 B |
+
+</details>
+
 ### How to Run
 
 This repo does not download puzzle files automatically. It is generally assumed that consumers have already downloaded files for their own daily competition.
